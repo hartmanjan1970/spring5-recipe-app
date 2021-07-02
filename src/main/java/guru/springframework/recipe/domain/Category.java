@@ -4,24 +4,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.Set;
 
 /**
  * @author Jan Hartman
  */
 @Entity
-public class UnitOfMeasure {
-	private String description;
+public class Category {
+
+	private String categoryName;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	public String getDescription() {
-		return description;
+	@ManyToMany(mappedBy ="categories")
+	private Set<Recipe> recipes;
+
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setDescription(String uom) {
-		this.description = uom;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public Long getId() {

@@ -7,7 +7,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.Set;
@@ -18,9 +21,17 @@ import java.util.Set;
 @Entity
 public class Recipe {
 
+	@ManyToMany
+	@JoinTable(name ="recipe_category",
+			joinColumns = @JoinColumn(name = "recipe_id"),
+			inverseJoinColumns = @JoinColumn(name = "category_id"))
+	private Set<Category> categories;
+
 	private Integer cookTime;
 
 	private String description;
+
+	private Difficulty difficulty;
 
 	private String directions;
 
@@ -37,17 +48,6 @@ public class Recipe {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Notes notes;
 
-	private Difficulty difficulty;
-
-	@Enumerated(EnumType.STRING)
-	public Difficulty getDifficulty() {
-		return difficulty;
-	}
-
-	public void setDifficulty(Difficulty difficulty) {
-		this.difficulty = difficulty;
-	}
-
 	private Integer prepTime;
 
 	private Integer servings;
@@ -55,6 +55,14 @@ public class Recipe {
 	private String source;
 
 	private String url;
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
 
 	public Integer getCookTime() {
 		return cookTime;
@@ -70,6 +78,15 @@ public class Recipe {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Enumerated(EnumType.STRING)
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
 	}
 
 	public String getDirections() {
