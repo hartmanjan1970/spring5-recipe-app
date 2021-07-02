@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 
 /**
@@ -21,7 +22,16 @@ public class Ingredient {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	//private UnitOfMeasure uom;
+	@OneToOne
+	private UnitOfMeasure uom;
+
+	public UnitOfMeasure getUom() {
+		return uom;
+	}
+
+	public void setUom(UnitOfMeasure uom) {
+		this.uom = uom;
+	}
 
 	@ManyToOne
 	private Recipe recipe;
