@@ -16,17 +16,6 @@ import java.util.Set;
 @Entity
 public class Recipe {
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-	private Set<Ingredient> ingredients;
-
-	public Set<Ingredient> getIngredients() {
-		return ingredients;
-	}
-
-	public void setIngredients(Set<Ingredient> ingredients) {
-		this.ingredients = ingredients;
-	}
-
 	private Integer cookTime;
 
 	private String description;
@@ -37,13 +26,16 @@ public class Recipe {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	//	private Difficulty difficulty;
-
 	@Lob
 	private Byte[] image;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+	private Set<Ingredient> ingredients;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Notes notes;
+
+	//	private Difficulty difficulty;
 
 	private Integer prepTime;
 
@@ -91,6 +83,14 @@ public class Recipe {
 
 	public void setImage(Byte[] image) {
 		this.image = image;
+	}
+
+	public Set<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(Set<Ingredient> ingredients) {
+		this.ingredients = ingredients;
 	}
 
 	public Notes getNotes() {

@@ -22,19 +22,11 @@ public class Ingredient {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne
-	private UnitOfMeasure uom;
-
-	public UnitOfMeasure getUom() {
-		return uom;
-	}
-
-	public void setUom(UnitOfMeasure uom) {
-		this.uom = uom;
-	}
-
 	@ManyToOne
 	private Recipe recipe;
+
+	@OneToOne
+	private UnitOfMeasure uom;
 
 	public BigDecimal getAmount() {
 		return amount;
@@ -66,6 +58,14 @@ public class Ingredient {
 
 	public void setRecipe(Recipe recipe) {
 		this.recipe = recipe;
+	}
+
+	public UnitOfMeasure getUom() {
+		return uom;
+	}
+
+	public void setUom(UnitOfMeasure uom) {
+		this.uom = uom;
 	}
 }
 
