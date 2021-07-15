@@ -9,6 +9,7 @@ import guru.springframework.recipe.domain.UnitOfMeasure;
 import guru.springframework.recipe.repositories.CategoryRepository;
 import guru.springframework.recipe.repositories.RecipeRepository;
 import guru.springframework.recipe.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ import java.util.List;
  * @author Jan Hartman
  */
 @Component
+@Slf4j
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 	private final CategoryRepository categoryRepository;
