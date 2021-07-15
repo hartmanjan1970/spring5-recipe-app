@@ -1,5 +1,7 @@
 package guru.springframework.recipe.domain;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,10 +12,13 @@ import java.util.Set;
 /**
  * @author Jan Hartman
  */
+@Data
 @Entity
 public class Category {
 
 	private String categoryName;
+
+	private String description;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,19 +27,4 @@ public class Category {
 	@ManyToMany(mappedBy = "categories")
 	private Set<Recipe> recipes;
 
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 }
