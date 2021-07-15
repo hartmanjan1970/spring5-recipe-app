@@ -1,6 +1,7 @@
 package guru.springframework.recipe.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import java.util.Set;
  * @author Jan Hartman
  */
 @Data
+@EqualsAndHashCode(exclude = {"recipes"})
 @Entity
 public class Category {
 

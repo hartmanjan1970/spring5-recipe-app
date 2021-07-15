@@ -13,10 +13,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Jan Hartman
@@ -45,6 +47,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 	 * @param event the event to respond to
 	 */
 	@Override
+	@Transactional
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		recipeRepository.saveAll(getRecipes());
 		log.debug("Loaded bootstrap data. {}", getRecipes());
@@ -106,8 +109,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		guacamoleRecipe.addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(2), uomDash));
 		guacamoleRecipe.addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), uomEach));
 
-		guacamoleRecipe.getCategories().add(categoryAmerican);
-		guacamoleRecipe.getCategories().add(categoryMexican);
+		final Set<Category> categories = guacamoleRecipe.getCategories();
+		categories.add(categoryAmerican);
+		categories.add(categoryMexican);
 
 		guacamoleRecipe.setUrl("http://www.simplyrecipes.com/recipes/perfect_guacamole/");
 		guacamoleRecipe.setServings(4);
