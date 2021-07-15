@@ -34,6 +34,7 @@ class IndexControllerTest {
 
 		// Then
 		assertThat(indexPage).isEqualTo("index");
+		verify(recipeService, times(1)).getAllRecipes();
 		verify(model, times(1)).addAttribute(eq("recipes"), anySet());
 	}
 
