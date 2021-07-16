@@ -22,11 +22,11 @@ public class RecipeController {
 	}
 
 	@GetMapping(value = "/recipe/index/{id}")
-	public String getRecipeIndex(@PathVariable Long id,
+	public String getRecipeIndex(@PathVariable String id,
 								 Model model) {
 		log.debug("Getting the Recipe index.");
 
-		final Recipe recipe = recipeService.findById(id)
+		final Recipe recipe = recipeService.findById(Long.parseLong(id))
 				.orElseThrow(() -> new RuntimeException("The requested recipe is not found for id: " + id));
 		model.addAttribute("recipe", recipe);
 
